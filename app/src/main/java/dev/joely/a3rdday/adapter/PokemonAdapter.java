@@ -1,11 +1,13 @@
 package dev.joely.a3rdday.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,8 +20,10 @@ import dev.joely.a3rdday.R;
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder> {
 
     private final List<Pokemon> pokemonList;
+    private final Context context;
 
-    public PokemonAdapter(List<Pokemon> pokemonList) {
+    public PokemonAdapter(Context context, List<Pokemon> pokemonList) {
+        this.context = context;
         this.pokemonList = pokemonList;
     }
 
@@ -35,27 +39,14 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
         Pokemon pokemon = pokemonList.get(position);
         holder.pokemonNameTextView.setText(pokemon.getName());
         holder.pokemonTypeTextView.setText(pokemon.getType());
+        holder.pokemonImageView.setImageResource(getImageResourceForPokemon(pokemon.getId())); // Set image based on Pokemon ID
+        holder.typeImageView.setImageResource(getImageResourceForType(pokemon.getType())); // Set type image
 
-        // Set type image
-        switch (pokemon.getType().toLowerCase()) {
-            case "fire":
-                holder.typeImageView.setImageResource(R.drawable.type_fire);
-                break;
-            case "water":
-                holder.typeImageView.setImageResource(R.drawable.type_water);
-                break;
-            case "grass":
-                holder.typeImageView.setImageResource(R.drawable.type_grass);
-                break;
-            default:
-                holder.typeImageView.setImageResource(R.drawable.type_default);
-                break;
-        }
-
+        // Set click listener
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), PokemonDetailsActivity.class);
-            intent.putExtra("pokemon_id", pokemon.getId());
-            v.getContext().startActivity(intent);
+            Intent intent = new Intent(context, PokemonDetailsActivity.class);
+            intent.putExtra("POKEMON_ID", pokemon.getId()); // Pass the correct Pokémon ID
+            context.startActivity(intent);
         });
     }
 
@@ -66,13 +57,43 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
 
     public static class PokemonViewHolder extends RecyclerView.ViewHolder {
         TextView pokemonNameTextView, pokemonTypeTextView;
-        ImageView typeImageView;
+        ImageView pokemonImageView;
+        ImageView typeImageView; // Add this for type image
 
         public PokemonViewHolder(@NonNull View itemView) {
             super(itemView);
             pokemonNameTextView = itemView.findViewById(R.id.pokemonNameTextView);
             pokemonTypeTextView = itemView.findViewById(R.id.pokemonTypeTextView);
-            typeImageView = itemView.findViewById(R.id.typeImageView);
+            pokemonImageView = itemView.findViewById(R.id.pokemonImageView);
+            typeImageView = itemView.findViewById(R.id.typeImageView); // Initialize this
+        }
+    }
+
+    // Method to get image resource based on Pokémon ID (assuming ID is used for Pokémon images)
+    private int getImageResourceForPokemon(int id) {
+        switch (id) {
+            case 1:
+                return R.drawable.img;
+            case 2:
+                return R.drawable.img_1;
+            case 3:
+                return R.drawable.img_2;
+            default:
+                return R.drawable.img; // Fallback image
+        }
+    }
+
+    // Method to get image resource based on Pokémon type
+    private int getImageResourceForType(String type) {
+        switch (type) {
+            case "Fire":
+                return R.drawable.type_fire;
+            case "Water":
+                return R.drawable.type_water;
+            case "Grass":
+                return R.drawable.type_grass;
+            default:
+                return R.drawable.type_default;
         }
     }
 }

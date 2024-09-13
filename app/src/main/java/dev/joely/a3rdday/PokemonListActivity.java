@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import dev.joely.a3rdday.R;
 import dev.joely.a3rdday.adapter.PokemonAdapter;
 
 public class PokemonListActivity extends AppCompatActivity {
@@ -27,7 +26,7 @@ public class PokemonListActivity extends AppCompatActivity {
         pokemonList.add(new Pokemon(3, "Bulbasaur", "Grass"));
         pokemonList.add(new Pokemon(4, "Squirtle", "Water"));
 
-        PokemonAdapter pokemonAdapter = new PokemonAdapter(pokemonList);
+        PokemonAdapter pokemonAdapter = new PokemonAdapter(this, pokemonList);
         pokemonRecyclerView.setAdapter(pokemonAdapter);
     }
 }

@@ -1,17 +1,15 @@
 package dev.joely.a3rdday;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.List;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class PokemonDetailsActivity extends AppCompatActivity {
 
-    private TextView pokemonNameTextView;
-    private TextView pokemonTypeTextView;
+    private TextView pokemonNameTextView, pokemonTypeTextView;
     private ImageView pokemonImageView;
 
     @Override
@@ -23,50 +21,43 @@ public class PokemonDetailsActivity extends AppCompatActivity {
         pokemonTypeTextView = findViewById(R.id.pokemonTypeTextView);
         pokemonImageView = findViewById(R.id.pokemonImageView);
 
-        int pokemonId = getIntent().getIntExtra("pokemon_id", -1);
-        // Fetch Pokémon details based on ID
+        Intent intent = getIntent();
+        int pokemonId = intent.getIntExtra("POKEMON_ID", -1);
+
+        // Dummy data to simulate the details
         Pokemon pokemon = getPokemonById(pokemonId);
 
         if (pokemon != null) {
             pokemonNameTextView.setText(pokemon.getName());
             pokemonTypeTextView.setText(pokemon.getType());
-            // Set image based on type
-            switch (pokemon.getType().toLowerCase()) {
-                case "fire":
-                    pokemonImageView.setImageResource(R.drawable.type_fire);
-                    break;
-                case "water":
-                    pokemonImageView.setImageResource(R.drawable.type_water);
-                    break;
-                case "grass":
-                    pokemonImageView.setImageResource(R.drawable.type_grass);
-                    break;
-                default:
-                    pokemonImageView.setImageResource(R.drawable.type_default);
-                    break;
-            }
+            pokemonImageView.setImageResource(getImageResourceForPokemon(pokemon.getId()));
+
+            // Set click listener for the image
+            pokemonImageView.setOnClickListener(v -> finish()); // Close activity on click
         }
     }
 
     private Pokemon getPokemonById(int id) {
-        // Fetch Pokémon from a list or database
-        // For simplicity, use a hardcoded list here
-        List<Pokemon> pokemonList = getPokemonList();
-        for (Pokemon pokemon : pokemonList) {
-            if (pokemon.getId() == id) {
-                return pokemon;
-            }
+        // Dummy implementation; replace with actual data source retrieval
+        switch (id) {
+            case 1: return new Pokemon(1, "Pikachu", "Electric");
+            case 2: return new Pokemon(2, "Charmander", "Fire");
+            case 3: return new Pokemon(3, "Bulbasaur", "Grass");
+            case 4: return new Pokemon(4, "Squirtle", "Water");
+            default: return null;
         }
-        return null;
     }
 
-    private List<Pokemon> getPokemonList() {
-        List<Pokemon> pokemonList = new ArrayList<>();
-        pokemonList.add(new Pokemon(1, "Pikachu", "Electric"));
-        pokemonList.add(new Pokemon(2, "Charmander", "Fire"));
-        pokemonList.add(new Pokemon(3, "Bulbasaur", "Grass"));
-        pokemonList.add(new Pokemon(4, "Squirtle", "Water"));
-        pokemonList.add(new Pokemon(5, "Eevee", "Normal"));
-        return pokemonList;
+    private int getImageResourceForPokemon(int id) {
+        switch (id) {
+            case 1:
+                return R.drawable.img;
+            case 2:
+                return R.drawable.img_1;
+            case 3:
+                return R.drawable.img_2;
+            default:
+                return R.drawable.img; // Fallback image
+        }
     }
 }

@@ -1,7 +1,7 @@
 package dev.joely.a3rdday;
 
 public class Pokemon {
-    private final int id; // Add this field
+    private final int id;
     private final String name;
     private final String type;
 
