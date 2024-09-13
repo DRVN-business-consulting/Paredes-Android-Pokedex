@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">3rdDay</string>
     <string name="pokemon_image">Pokémon Image</string>
+    <string name="pokemon_type_image">Pokémon Type Image</string>
 </resources>

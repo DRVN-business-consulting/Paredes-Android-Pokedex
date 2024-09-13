@@ -26,7 +26,6 @@ public class PokemonListActivity extends AppCompatActivity {
         pokemonList.add(new Pokemon("Charmander", "Fire"));
         pokemonList.add(new Pokemon("Bulbasaur", "Grass"));
         pokemonList.add(new Pokemon("Squirtle", "Water"));
-        pokemonList.add(new Pokemon("Eevee", "Normal"));
 
         PokemonAdapter pokemonAdapter = new PokemonAdapter(pokemonList);
         pokemonRecyclerView.setAdapter(pokemonAdapter);

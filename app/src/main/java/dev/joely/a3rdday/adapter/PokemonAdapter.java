@@ -3,6 +3,7 @@ package dev.joely.a3rdday.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +33,35 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
         Pokemon pokemon = pokemonList.get(position);
         holder.pokemonNameTextView.setText(pokemon.getName());
         holder.pokemonTypeTextView.setText(pokemon.getType());
+
+        // Set Pokémon image based on position
+        switch (position % 3) {
+            case 0:
+                holder.pokemonImageView.setImageResource(R.drawable.img);
+                break;
+            case 1:
+                holder.pokemonImageView.setImageResource(R.drawable.img_1);
+                break;
+            case 2:
+                holder.pokemonImageView.setImageResource(R.drawable.img_2);
+                break;
+        }
+
+        // Set type image based on Pokémon type
+        switch (pokemon.getType().toLowerCase()) {
+            case "fire":
+                holder.typeImageView.setImageResource(R.drawable.type_fire);
+                break;
+            case "water":
+                holder.typeImageView.setImageResource(R.drawable.type_water);
+                break;
+            case "grass":
+                holder.typeImageView.setImageResource(R.drawable.type_grass);
+                break;
+            default:
+                holder.typeImageView.setImageResource(R.drawable.type_default);
+                break;
+        }
     }
 
     @Override
@@ -41,11 +71,14 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
 
     public static class PokemonViewHolder extends RecyclerView.ViewHolder {
         TextView pokemonNameTextView, pokemonTypeTextView;
+        ImageView pokemonImageView, typeImageView;
 
         public PokemonViewHolder(@NonNull View itemView) {
             super(itemView);
             pokemonNameTextView = itemView.findViewById(R.id.pokemonNameTextView);
             pokemonTypeTextView = itemView.findViewById(R.id.pokemonTypeTextView);
+            pokemonImageView = itemView.findViewById(R.id.pokemonImageView);
+            typeImageView = itemView.findViewById(R.id.typeImageView);
         }
     }
 }
