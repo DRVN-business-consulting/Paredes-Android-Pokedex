@@ -22,10 +22,10 @@ public class PokemonListActivity extends AppCompatActivity {
         pokemonRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         List<Pokemon> pokemonList = new ArrayList<>();
-        pokemonList.add(new Pokemon("Pikachu", "Electric"));
-        pokemonList.add(new Pokemon("Charmander", "Fire"));
-        pokemonList.add(new Pokemon("Bulbasaur", "Grass"));
-        pokemonList.add(new Pokemon("Squirtle", "Water"));
+        pokemonList.add(new Pokemon(1, "Pikachu", "Electric"));
+        pokemonList.add(new Pokemon(2, "Charmander", "Fire"));
+        pokemonList.add(new Pokemon(3, "Bulbasaur", "Grass"));
+        pokemonList.add(new Pokemon(4, "Squirtle", "Water"));
 
         PokemonAdapter pokemonAdapter = new PokemonAdapter(pokemonList);
         pokemonRecyclerView.setAdapter(pokemonAdapter);

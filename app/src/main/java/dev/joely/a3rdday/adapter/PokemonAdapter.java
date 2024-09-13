@@ -1,5 +1,6 @@
 package dev.joely.a3rdday.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import dev.joely.a3rdday.Pokemon;
+import dev.joely.a3rdday.PokemonDetailsActivity;
 import dev.joely.a3rdday.R;
 
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder> {
@@ -34,20 +36,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
         holder.pokemonNameTextView.setText(pokemon.getName());
         holder.pokemonTypeTextView.setText(pokemon.getType());
 
-        // Set Pokémon image based on position
-        switch (position % 3) {
-            case 0:
-                holder.pokemonImageView.setImageResource(R.drawable.img);
-                break;
-            case 1:
-                holder.pokemonImageView.setImageResource(R.drawable.img_1);
-                break;
-            case 2:
-                holder.pokemonImageView.setImageResource(R.drawable.img_2);
-                break;
-        }
-
-        // Set type image based on Pokémon type
+        // Set type image
         switch (pokemon.getType().toLowerCase()) {
             case "fire":
                 holder.typeImageView.setImageResource(R.drawable.type_fire);
@@ -62,6 +51,12 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
                 holder.typeImageView.setImageResource(R.drawable.type_default);
                 break;
         }
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), PokemonDetailsActivity.class);
+            intent.putExtra("pokemon_id", pokemon.getId());
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override
@@ -71,13 +66,12 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
 
     public static class PokemonViewHolder extends RecyclerView.ViewHolder {
         TextView pokemonNameTextView, pokemonTypeTextView;
-        ImageView pokemonImageView, typeImageView;
+        ImageView typeImageView;
 
         public PokemonViewHolder(@NonNull View itemView) {
             super(itemView);
             pokemonNameTextView = itemView.findViewById(R.id.pokemonNameTextView);
             pokemonTypeTextView = itemView.findViewById(R.id.pokemonTypeTextView);
-            pokemonImageView = itemView.findViewById(R.id.pokemonImageView);
             typeImageView = itemView.findViewById(R.id.typeImageView);
         }
     }
