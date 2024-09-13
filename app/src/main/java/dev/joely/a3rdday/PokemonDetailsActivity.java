@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class PokemonDetailsActivity extends AppCompatActivity {
 
-    private TextView pokemonNameTextView, pokemonTypeTextView;
+    private TextView pokemonNameTextView, pokemonTypeTextView, pokemonDetailsTextView;
     private ImageView pokemonImageView;
 
     @Override
@@ -19,6 +19,7 @@ public class PokemonDetailsActivity extends AppCompatActivity {
 
         pokemonNameTextView = findViewById(R.id.pokemonNameTextView);
         pokemonTypeTextView = findViewById(R.id.pokemonTypeTextView);
+        pokemonDetailsTextView = findViewById(R.id.pokemonDetailsTextView);
         pokemonImageView = findViewById(R.id.pokemonImageView);
 
         Intent intent = getIntent();
@@ -31,6 +32,9 @@ public class PokemonDetailsActivity extends AppCompatActivity {
             pokemonNameTextView.setText(pokemon.getName());
             pokemonTypeTextView.setText(pokemon.getType());
             pokemonImageView.setImageResource(getImageResourceForPokemon(pokemon.getId()));
+
+            // Set placeholder details text
+            pokemonDetailsTextView.setText(getPokemonDetails(pokemonId));
 
             // Set click listener for the image
             pokemonImageView.setOnClickListener(v -> finish()); // Close activity on click
@@ -58,6 +62,17 @@ public class PokemonDetailsActivity extends AppCompatActivity {
                 return R.drawable.img_2;
             default:
                 return R.drawable.img; // Fallback image
+        }
+    }
+
+    private String getPokemonDetails(int id) {
+        // Provide detailed information based on Pokemon ID
+        switch (id) {
+            case 1: return "Pikachu is an Electric-type Pokémon. It is known for its yellow fur and ability to generate electricity.";
+            case 2: return "Charmander is a Fire-type Pokémon. It has a flame on its tail and is known for its fiery personality.";
+            case 3: return "Bulbasaur is a Grass/Poison-type Pokémon. It has a plant bulb on its back that grows into a large flower.";
+            case 4: return "Squirtle is a Water-type Pokémon. It has a shell and is known for its water-based attacks.";
+            default: return "No details available.";
         }
     }
 }

@@ -8,7 +8,8 @@
     <ImageView
         android:id="@+id/pokemonImageView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp" />
 
     <TextView
         android:id="@+id/pokemonNameTextView"
@@ -26,4 +27,15 @@
         android:text="Pokemon Type"
         android:textSize="20sp"
         android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/pokemonDetailsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:padding="16dp" />
 </LinearLayout>
